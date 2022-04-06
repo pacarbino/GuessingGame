@@ -11,20 +11,30 @@ numGuesses = 7 # statring number of guesses
 numGuessesAlert = "You have " + str(numGuesses) + " guesses remaining." # Number of guesses left message
 
 # displays
-
 guessed = []
-print(guessed)
+
+print("""Hello! We're going to play a little word guessing game!
+I'm going to pick a word, and you're going to try to guess it.
+I'll show you how many letters are in the word, and which letters you've guessed.
+You have 7 chances to guess.
+If you guess wrong, you'll lose one of your guesses.
+to win, you have to guess the word before running out of guesses.
+Okay, here we go!!""")
 
 while numGuesses > 0:
-    print(numGuessesAlert) # tell user number of guesses left
+    print(numGuessesAlert) # tell user number of guesses left ******NOT SUBTRACTING******
     print(wordDispAlert) # show user progress
     print("These are the letters you've already guessed:" + str(guessed))
     guess = input("What letter would you like to guess?: ") # get user input
-        if guess in guessed = True:
-            
-    print(str("You have guessed " + guess + "!"))#test
-    guessed.append(guess)
-    print(str(guessed))#test 
-    numGuesses += 1
+    
+    #repeat guess
+    if guess in guessed:
+        print("Hmmmm, looks like you've guessed that one already... Try again!")
+    
+    #new guess
+    elif guess not in guessed:
+        print(str("You have guessed " + guess + "!"))#test
+        guessed.append(guess)
+        numGuesses = numGuesses - 1
 
-guessed = []
+print("OOPS! you're all out of guesses... Better luck next time.")
