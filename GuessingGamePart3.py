@@ -1,3 +1,4 @@
+# Part 3 (INCOMPLETE)
 # word variables:
 word = "alphabet" # "generate" word ***FIX LATER***
 wordArray = list(word)
@@ -44,11 +45,11 @@ while numGuesses > 0 and correctGuesses != wordArray:
     =============================================
     """)
     guess = input("What would you like to guess?: ") # get user input
-
+    checkGuess = guess.isalpha()
 
 
     # check guess:
-    if type(guess) != str:  # *******DOES NOT WORK (everything is a string)******
+    if checkGuess == False:
         print("""
         =============================
         Please guess a LETTER or Word
