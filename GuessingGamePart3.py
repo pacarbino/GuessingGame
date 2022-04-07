@@ -1,4 +1,4 @@
-# Part 3 (INCOMPLETE)
+# Part 3 (INCOMPLETE, starting with part 2...)
 # word variables:
 word = "alphabet" # "generate" word ***FIX LATER***
 wordArray = list(word)
@@ -17,8 +17,7 @@ for letter in word:
 
 print("""
 
-
-
+==================================================================
 Hello! We're going to play a little word guessing game!
 I'm going to pick a word, and you're going to try to guess it.
 I'll show you how many letters are in the word, 
@@ -28,52 +27,70 @@ If you guess wrong, you'll lose one of your guesses.
 To win, you have to guess the word before running out of guesses.
 To quit at any time, press Ctrl+C.
 Seem pretty reasonable? Okay, here we go!!
-
-
+===================================================================
 
 """)
-
-while numGuesses > 0 and correctGuesses != wordArray:
+while numGuesses > 0 and correctGuesses != wordArray and word not in guessed:
     
     print("You have " + str(numGuesses) + " guesses remaining.") # number of guesses left message
     print("Your word has " + str(len(word)) + " letters.")# remind how many letters are in the word
     print("This is what you've got right so far: " + str(correctGuesses)) # show user progress
     print("""
-    =============================================
-    These are the letters you've already guessed:
+
+    ======================================================
+    These are the letters or words you've already guessed:
     """ + str(guessed) + """
-    =============================================
+    ======================================================
+
     """)
     guess = input("What would you like to guess?: ") # get user input
-    checkGuess = guess.isalpha()
+    checkInput = guess.isalpha()
 
-
-    # check guess:
-    if checkGuess == False:
+     # check guess:
+    if checkInput == False: # or len(guess) != len(word):
         print("""
-        =============================
-        Please guess a LETTER or Word
-        =============================
+
+        ======================================================
+        Please guess either a LETTER or a WORD with """ + str(len(word)) + """ letters.
+        ======================================================
+
         """)
 
+    # check if word guessed:
+    elif guess == word:
+        print("""
+
+        ====================================================================
+        Woah! You guessed it! The word was """ + str(word) + """! You win!!!
+
+                            ***Congratulations!!!***
+
+        ====================================================================
+
+        """)
+        guessed.append(guess)
     
     # repeat guess:
     elif guess in guessed:
         print("""
+
         ====================================================
         Hmmmm, looks like you've guessed that one already... 
         Try again!
         ====================================================
+
         """)
     
     # correct guess:
     elif guess in wordArray:
-        print(str("""
-        =================================
-        Good Guess!! 
-        """ + guess + """ is in the word!
-        =================================
-        """))
+        print("""
+
+            =================================
+            Good Guess!! 
+            """ + str(guess) + """ is in the word!
+            =================================
+
+        """)
         for place in range(len(wordArray)):
             if wordArray[place] == guess:
                 correctGuesses[place] = guess
@@ -81,24 +98,26 @@ while numGuesses > 0 and correctGuesses != wordArray:
         if correctGuesses == wordArray:
             print("""
 
-            ===================================
-            ***Congratulations!!! You win!!!***
-            
-            The word was """ + str(word) + """!
-            ===================================
-            
+            ====================================================================
+            Woah! You guessed it! The word was """ + str(word) + """! You win!!!
+
+                                ***Congratulations!!!***
+
+            ====================================================================
+
             """)
         
     
     # incorrect guess:
     elif guess not in guessed:
-        print(str("""
+        print("""
+
         ==========================================
-        You have guessed """ + guess + """! 
-        ...Unfortunately, """ + guess + """ is not 
-        part of the word.
+        You have guessed """ + str(guess) + """! 
+        ...Unfortunately, """ + str(guess) + """ is wrong...
         ==========================================
-        """))
+
+        """)
         guessed.append(guess)
         numGuesses -= 1
         if numGuesses == 0:
@@ -108,7 +127,7 @@ while numGuesses > 0 and correctGuesses != wordArray:
             OH NO! You're all out of guesses...
             The word was (drumroll please...)
 
-            """ + word + """!
+            """ + str(word) + """!
 
             Better luck next time!
             ===================================
