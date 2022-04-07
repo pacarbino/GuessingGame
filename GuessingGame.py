@@ -1,20 +1,18 @@
 # word variables:
-word = "alphabet" # "generate" word
-wordArray = ('a','l','p','h','a','b','e','t') # turn word into array (make code later)
-wordLen = len(word) #count word length
-wordDisp = ("_" * wordLen) # create word display
-wordAlert = "Your word has" + str(wordLen) + "letters."
-wordDispAlert = "This is what you've got so far: " + str(wordDisp)
+word = "alphabet" # "generate" word ***FIX LATER***
+wordArray = list(word)
 
 # number variables:
 numGuesses = 7 # statring number of guesses
-numGuessesAlert = "You have " + str(numGuesses) + " guesses remaining." # Number of guesses left message
 
 
 # guess variables:
 guessed = []
 correctGuesses = []
 
+#print(wordArray) # TEST
+for letter in word:
+    correctGuesses.append("_")
 
 print("""
 
@@ -34,14 +32,23 @@ Seem pretty reasonable? Okay, here we go!!
 
 """)
 
-while numGuesses > 0:
-    print(numGuessesAlert) # tell user number of guesses left ******NOT SUBTRACTING from string, but working in code******
-    print(wordDispAlert) # show user progress
-    print("These are the letters you've already guessed:" + str(guessed))
-    guess = input("What letter would you like to guess?: ") # get user input
+while numGuesses > 0 and correctGuesses != wordArray:
     
+    print("You have " + str(numGuesses) + " guesses remaining.") # number of guesses left message
+    print("Your word has " + str(len(word)) + " letters.")# remind how many letters are in the word
+    print("This is what you've got right so far: " + str(correctGuesses)) # show user progress
+    print("""
+    =============================================
+    These are the letters you've already guessed:
+    """ + str(guessed) + """
+    =============================================
+    """)
+    guess = input("What would you like to guess?: ") # get user input
+
+
+
     # check guess:
-    if type(guess) != str:
+    if type(guess) != str:  # *******DOES NOT WORK (everything is a string)******
         print("""
         =============================
         Please guess a LETTER or Word
@@ -58,7 +65,7 @@ while numGuesses > 0:
         ====================================================
         """)
     
-    # repat guess:
+    # correct guess:
     elif guess in wordArray:
         print(str("""
         =================================
@@ -66,10 +73,23 @@ while numGuesses > 0:
         """ + guess + """ is in the word!
         =================================
         """))
+        for place in range(len(wordArray)):
+            if wordArray[place] == guess:
+                correctGuesses[place] = guess
         guessed.append(guess)
-        correctGuesses.append(guess)
+        if correctGuesses == wordArray:
+            print("""
+
+            ===================================
+            ***Congratulations!!! You win!!!***
+            
+            The word was """ + str(word) + """!
+            ===================================
+            
+            """)
+        
     
-    # new guess:
+    # incorrect guess:
     elif guess not in guessed:
         print(str("""
         ==========================================
@@ -79,9 +99,17 @@ while numGuesses > 0:
         ==========================================
         """))
         guessed.append(guess)
-        numGuesses = numGuesses - 1
+        numGuesses -= 1
+        if numGuesses == 0:
+            print("""
 
-print("""OH NO! You're all out of guesses... 
-Better luck next time!
+            ===================================
+            OH NO! You're all out of guesses...
+            The word was (drumroll please...)
 
-""")
+            """ + word + """!
+
+            Better luck next time!
+            ===================================
+
+            """)
