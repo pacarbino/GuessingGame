@@ -1,6 +1,13 @@
 # keep track of used words: (part 4)
 usedWords = [] ##okay, now it's updating from game to game. that's good.
 
+# randomize
+import random
+f = open('EnglishWords.txt','rt')
+wordDump = f.read()
+wordList = wordDump.split()
+
+
 def wannaPlay():
     playAgain = input("Would you like to play again? (Y/N): ").upper()
     if playAgain == "Y":
@@ -13,19 +20,17 @@ def wannaPlay():
 
 def game():    
     
-    #### NEEDS WORK!!! should be a function you can call whenever... 
-    # random word generator:
+    word = random.choice(wordList).upper()
     
-    import random
-    word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
+    
     wordArray = list(word)
 
     # keep track of used words: (part 4)
     usedWords.append(word)
 
-    ####TEST!!!!
-    print(word)
-    print(usedWords)
+    #### uncomment below 2 lines for TEST!!!!
+    # print(word)
+    # print(usedWords)
 
     # starting number of guesses:
     numGuesses = 7
@@ -36,6 +41,7 @@ def game():
     # correctly guessed array:
     correctGuesses = []
 
+    # ***important!***
     for letter in word:
         correctGuesses.append("_")
 
