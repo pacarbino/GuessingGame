@@ -1,17 +1,17 @@
-# Part 3 (INCOMPLETE, starting with part 2...)
-# word variables:
-word = "alphabet" # "generate" word ***FIX LATER***
+# pick random word:
+import random
+word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
 wordArray = list(word)
 
-# number variables:
-numGuesses = 7 # statring number of guesses
+# starting number of guesses:
+numGuesses = 7
 
-
-# guess variables:
+# all guessed array:
 guessed = []
+
+# correctly guessed array:
 correctGuesses = []
 
-#print(wordArray) # TEST
 for letter in word:
     correctGuesses.append("_")
 
@@ -43,11 +43,14 @@ while numGuesses > 0 and correctGuesses != wordArray and word not in guessed:
     ======================================================
 
     """)
-    guess = input("What would you like to guess?: ") # get user input
+
+    # get user input
+    guess = input("What would you like to guess?: ").upper()
+    # check input is letter:
     checkInput = guess.isalpha()
 
      # check guess:
-    if checkInput == False: # or len(guess) != len(word):
+    if checkInput == False:
         print("""
 
         ======================================================
