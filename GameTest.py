@@ -1,21 +1,24 @@
 # keep track of used words: (part 4)
 usedWords = [] ##okay, now it's updating from game to game. that's good.
 
-
 def wannaPlay():
     playAgain = input("Would you like to play again? (Y/N): ").upper()
     if playAgain == "Y":
         game()
     elif playAgain == "N":
         print("Well, it has been a pleaseure. Have a great day!")    
+    else:
+        print("(Pssssst, you have to guess either 'Y' or 'N')")
+        wannaPlay()  
 
 def game():    
     
-    #### NEEDS WORK!!! should be a function you can call whenever...
+    #### NEEDS WORK!!! should be a function you can call whenever... 
+    # random word generator:
+    
     import random
     word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
     wordArray = list(word)
-
 
     # keep track of used words: (part 4)
     usedWords.append(word)
@@ -94,8 +97,8 @@ def game():
 
             """)
             # ask to play again:
+            guessed.append(guess)
             wannaPlay()
-            #guessed.append(guess) not needed???????????????
         
         # repeat guess:
         elif guess in guessed:

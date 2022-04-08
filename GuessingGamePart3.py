@@ -1,9 +1,9 @@
 # pick random word: (part 3)
-def randomWord():
-    import random
-    word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
-    wordArray = list(word)
-randomWord()
+
+import random
+word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
+wordArray = list(word)
+
 
 # keep track of used words: (part 4)
 usedWords = []
