@@ -1,7 +1,17 @@
-# pick random word:
-import random
-word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
-wordArray = list(word)
+# pick random word: (part 3)
+def randomWord():
+    import random
+    word = random.choice(open('EnglishWords.txt','rt').read().split()).upper()
+    wordArray = list(word)
+randomWord()
+
+# keep track of used words: (part 4)
+usedWords = []
+usedWords.append(word)
+
+####TEST!!!!
+print(word)
+print(usedWords)
 
 # starting number of guesses:
 numGuesses = 7
@@ -30,6 +40,7 @@ Seem pretty reasonable? Okay, here we go!!
 ===================================================================
 
 """)
+
 while numGuesses > 0 and correctGuesses != wordArray and word not in guessed:
     
     print("You have " + str(numGuesses) + " guesses remaining.") # number of guesses left message
@@ -130,7 +141,7 @@ while numGuesses > 0 and correctGuesses != wordArray and word not in guessed:
             OH NO! You're all out of guesses...
             The word was (drumroll please...)
 
-            """ + str(word) + """!
+                    """ + str(word) + """!
 
             Better luck next time!
             ===================================
